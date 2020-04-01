@@ -1,0 +1,8 @@
+brower_driver.py：浏览器驱动工具类
+test_jingdong.py：多个操作例子
+config.py：配置参数文件
+mysql.py：数据库工具类
+my_pymysql.py：python连接数据库操作例子
+test_xiushiqi.py：unittest+htmlrunner操作例子
+unittest断言例子.py：多种断言的例子
+my_wait：元素的显示等待封装，可见等待visibility，另外一种是存在等待presence
