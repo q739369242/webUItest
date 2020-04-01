@@ -1,0 +1,80 @@
+'''
+关于css定位
+1、 #代表id  .代表class
+2、#id,#id2 代表定位id和id2两个元素
+3、#id a【href=''】代表定位id下面所有后代a，包括儿子 孙子，这个最好用
+4、#id > a  代表定位id直属后代即儿子a，查不到孙子
+5、如果一个属性同时有多个值，就#id#id2
+6、属性包含例如属性href=“xxxxx，700以上”,可以这样搜  #id a【href*='7000以上'】，这个组合最好用√
+
+'''
+'''
+关于其他
+1、
+    用于获取元素的文字，可以用作断言的判断条件
+logoContext1=driver.find_element_by_css_selector(".J_valueList a[href*=\"7000以上\"] ").text
+
+    #通过get_attribute(‘textContent’)来获取元素的文本值，可以用作断言的判断条件
+logoContext1 = driver.find_element_by_xpath('//div[@class="logo"]/span').get_attribute('textContent')
+
+    #通过get_attribute(‘value’)来获取输入框/文本框中的输入的文本值，可以用作断言的判断条件
+inputContext1 = driver.find_element_by_xpath('//input[@class="ivu-input"]').get_attribute('value')
+
+断言：assert x=‘xx’   等于if 表达式==True  如果为true就继续执行，如果为False，下面的语句都不执行了
+    assert logoContext1 == u'请您填写手机/邮箱/用户名'
+    print ('Test pass.')
+    如果为true就继续执行，如果为False，下面的语句都不执行了
+最好再配合查询数据库结果，双重验证
+
+
+2、is_displayed()：判断元素是否显示，结果为一个布尔值，True或False
+real_display = browser.find_element_by_id("TANGRAM__PSP_10__footerULoginBtn").is_displayed()
+if real_display:
+    browser.find_element_by_id("TANGRAM__PSP_10__footerULoginBtn").click()   # 如果为TRUE在登录的弹框里点击用户名密码登录
+
+3、is_selected()：判断元素是否被选中，结果为一个布尔值，True或False
+if browser.find_element_by_xpath("//p[@id='TANGRAM__PSP_10__memberPassWrapper']/input").is_selected():
+        print("默认已选中...")
+    else:
+        print("默认未选中...")
+
+4、
+    #元素.parentNode.removeChild(元素)删除子元素
+    #(id或class).remove()删除元素
+    #js="$('#train_date').remove()"#删除时间选择插件
+    #用js去掉属性
+    js ="$('input[id=train_date]').removeAttr('readonly')"
+5、
+    #执行js语句
+    driver.execute_script(js)
+    #当语句不是对元素进行操作时，不用带$
+    js = "window.scrollTo(0,1500)"
+
+6、driver.save_screenshot(截图地址)
+
+7、os.path.abspath（）获取当前目录下的文件
+file_path = 'file:///' + os.path.abspath('checkbox.html')
+driver.get(file_path)
+
+8、os.path.dirname（）获取xx的上一个目录
+9、os.getcwd()获取现在编写的py文件所在的目录
+'''
+
+    '''
+    <select name="NR" id="nr">
+    <option value="10" selected="">每页显示10条</option>
+    <option value="50">每页显示50条</option>
+    <option value="20">每页显示20条</option>
+    </select>
+
+    select----option型下拉选择框:
+    #导入工具类，
+    from selenium.webdriver.support.ui import Select
+    #进行元素定位
+    tiaoshu=(By.NAME,'NR')
+    sousuotiaoshu=pagecz(driver).find_element(*tiaoshu)
+    #再选择选项
+    Select(sousuotiaoshu).select_by_index(index，例如0，0为第一个选项)    　　  # 以index属性值来查找匹配的元素并选择；
+    Select(sousuotiaoshu).select_by_value(value ,例如'50')  # 以value属性值来查找该option并选择；
+    Select(sousuotiaoshu).select_by_visible_text(text 例如'每页显示50条')  # 以text文本值来查找匹配的元素并选择；
+    '''
